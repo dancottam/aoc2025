@@ -47,7 +47,12 @@ class Dial(startPosition: Int) {
         val direction = rotation[0]
         val distance = rotation.substring(1).toInt()
 
-        repeat(distance) {
+        val fullRotations = distance / stepsInFullRotation
+        val remainder = distance % stepsInFullRotation
+
+        partTwoCount += fullRotations
+
+        repeat(remainder) {
             position = (
                     if (direction == 'L')
                         (position - 1 + stepsInFullRotation) % stepsInFullRotation
