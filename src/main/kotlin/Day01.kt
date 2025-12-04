@@ -9,7 +9,6 @@ fun main() {
         return dial.partTwoCount(input)
     }
 
-    // Read the input from the `src/main/resources/Day01.txt` file.
     val input = readInput("Day01")
     part1(input).println()
     part2(input).println()

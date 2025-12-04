@@ -7,7 +7,6 @@ fun main() {
         return input.sumOf { maxJoltage(bank = it, numBatteries = 12) }
     }
 
-    // Read the input from the `src/main/resources/Day01.txt` file.
     val input = readInput("Day03")
     part1(input).println()
     part2(input).println()
