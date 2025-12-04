@@ -1,10 +1,10 @@
 fun main() {
     fun part1(input: List<String>): Long {
-        return input.sumOf { partOneMaxJoltage(it) }
+        return input.sumOf { maxJoltage(bank = it, numBatteries = 2) }
     }
 
     fun part2(input: List<String>): Long {
-        return 0
+        return input.sumOf { maxJoltage(bank = it, numBatteries = 12) }
     }
 
     // Read the input from the `src/main/resources/Day01.txt` file.
@@ -13,17 +13,17 @@ fun main() {
     part2(input).println()
 }
 
-fun partOneMaxJoltage(bank: String): Long {
-    var firstDigit = largestDigit(bank)
-    var firstDigitPos = bank.indexOf(firstDigit)
-    if (firstDigitPos == bank.length - 1) {
-        firstDigit = largestDigit(bank.replace(firstDigit, ""))
-        firstDigitPos = bank.indexOf(firstDigit)
-    }
-    val secondDigit = largestDigit(bank.substring(firstDigitPos + 1))
-    return (firstDigit + secondDigit).toLong()
-}
+fun maxJoltage(bank: String, numBatteries: Int): Long {
 
-private fun largestDigit(value: String): String {
-    return value.toCharArray().map { it.toString().toLong() }.maxOf { it }.toString()
+    var startIndex = 0
+    var endIndex = bank.length - numBatteries
+
+    var maxJoltage = ""
+    repeat(numBatteries) {
+        endIndex++
+        val digit = bank.substring(startIndex, endIndex).toCharArray().maxOf { it.toString().toInt() }
+        startIndex = bank.indexOf(digit.toString(), startIndex) + 1
+        maxJoltage += digit
+    }
+    return maxJoltage.toLong()
 }
